@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>AuraPlay - Music Player</title>
+  <meta name="title" content="AuraPlay - Premium Music Player">
+  <meta name="description" content="A premium glassmorphic web music player experience featuring dynamic background glows, custom playlists, active wave visualizers, and multiple responsive color themes.">
+
+  <link rel="shortcut icon" href="./assets/images/music.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,-25" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+  <div class="app-container">
+    
+    <!-- Top Glassmorphic Navigation Bar -->
+    <header class="top-bar">
+      <div class="logo">
+        <span class="fa-solid fa-music"></span>
+        <h1 class="title-lg">AuraPlay</h1>
+      </div>
+
+      <div class="top-bar-actions">
+        <!-- Playlist sidebar toggler for mobile -->
+        <button class="btn-icon btn-playlist-toggle" data-playlist-toggler title="Toggle Playlist">
+          <span class="material-symbols-rounded">queue_music</span>
+        </button>
+        
+        <!-- User Profile Avatar (clicks to show theme customization dropdown) -->
+        <img src="./assets/images/ankit_img.jpeg" alt="User Avatar" class="user-photo" id="userAvatarBtn" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop'">
+
+        <!-- User Settings & Customization Panel -->
+        <div class="user-menu" id="userMenu">
+          <h3>Custom Themes</h3>
+          <div class="theme-options">
+            <button class="theme-btn active" data-theme="midnight">
+              <span class="theme-color-dot dot-midnight"></span> Midnight Aurora
+            </button>
+            <button class="theme-btn" data-theme="cyberpunk">
+              <span class="theme-color-dot dot-cyberpunk"></span> Cyberpunk Glow
+            </button>
+            <button class="theme-btn" data-theme="emerald">
+              <span class="theme-color-dot dot-emerald"></span> Emerald Breeze
+            </button>
+            <button class="theme-btn" data-theme="sunset">
+              <span class="theme-color-dot dot-sunset"></span> Sunset Gold
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Player Dashboard Grid -->
+    <main class="main-content">
+      
+      <!-- Left Panel: Interactive Playlist & Search -->
+      <aside class="sidebar" data-playlist>
+        
+        <!-- Search Music Bar -->
+        <div class="search-container">
+          <div class="search-box">
+            <span class="material-symbols-rounded">search</span>
+            <input type="text" id="playlistSearch" placeholder="Search song or artist...">
+          </div>
+        </div>
+
+        <!-- Playlist Header details -->
+        <div class="playlist-header">
+          <h2>My Library</h2>
+          <span class="track-count" id="totalTracksLabel">5 Songs</span>
+        </div>
+
+        <!-- Playlist Track items -->
+        <div class="playlist-scroll">
+          <ul class="music-list" data-music-list>
+            <!-- Generated dynamically in script.js -->
+          </ul>
+        </div>
+
+        <!-- Sidebar footer credits -->
+        <footer class="sidebar-footer">
+          <span>AuraPlay © 2026</span>
+          <a href="#" target="_blank">View Project</a>
+        </footer>
+      </aside>
+
+      <!-- Right Panel: Full Player Console -->
+      <section class="player-view">
+        <div class="background-blur" id="bgBlur"></div>
+
+        <!-- Vinyl Record Player Deck -->
+        <div class="vinyl-player-section">
+          <!-- Record Tone-arm needle -->
+          <div class="tonearm" id="tonearmNeedle">
+            <div class="tonearm-base"></div>
+            <div class="tonearm-shaft"></div>
+            <div class="tonearm-head"></div>
+          </div>
+
+          <!-- Vinyl Record Disc -->
+          <div class="vinyl-disc" id="vinylDisc">
+            <div class="vinyl-poster">
+              <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=500&auto=format&fit=crop" width="400" height="400" alt="Track Cover" class="img-cover" data-player-banner>
+            </div>
+            <div class="vinyl-spindle"></div>
+          </div>
+        </div>
+
+        <!-- Current Track Information -->
+        <div class="song-info">
+          <h2 class="player-title" data-title>Warriyo - Mortals</h2>
+          <p class="player-artist" data-artist>Warriyo</p>
+          <div class="player-meta">
+            <span data-album>NCS</span>
+            <span data-year>2016</span>
+          </div>
+        </div>
+
+        <!-- Visualizer waveform simulation -->
+        <div class="visualizer-container" id="visualizer">
+          <div class="visualizer-bar" style="height: 4px;"></div>
+          <div class="visualizer-bar" style="height: 12px;"></div>
+          <div class="visualizer-bar" style="height: 20px;"></div>
+          <div class="visualizer-bar" style="height: 28px;"></div>
+          <div class="visualizer-bar" style="height: 18px;"></div>
+          <div class="visualizer-bar" style="height: 24px;"></div>
+          <div class="visualizer-bar" style="height: 32px;"></div>
+          <div class="visualizer-bar" style="height: 15px;"></div>
+          <div class="visualizer-bar" style="height: 22px;"></div>
+          <div class="visualizer-bar" style="height: 30px;"></div>
+          <div class="visualizer-bar" style="height: 10px;"></div>
+          <div class="visualizer-bar" style="height: 16px;"></div>
+          <div class="visualizer-bar" style="height: 6px;"></div>
+        </div>
+
+        <!-- Range Seeking & Audio Controls -->
+        <div class="player-controls-block">
+          <div class="slider-group">
+            <div class="range-wrapper">
+              <input type="range" step="1" max="100" value="0" class="range" data-range data-seek>
+              <div class="range-fill" data-range-fill></div>
+            </div>
+            <div class="time-stamps">
+              <span data-running-time>0:00</span>
+              <span data-duration>0:00</span>
+            </div>
+          </div>
+
+          <!-- Buttons Panel -->
+          <div class="buttons-row">
+            
+            <!-- Volume controls -->
+            <div class="volume-control">
+              <button class="btn-player" data-volume-btn title="Mute Volume">
+                <span class="material-symbols-rounded">volume_up</span>
+              </button>
+              <div class="range-wrapper">
+                <input type="range" step="0.05" max="1" value="0.8" class="range" data-range data-volume>
+                <div class="range-fill" data-range-fill style="width: 80%;"></div>
+              </div>
+            </div>
+
+            <!-- Playback media controls -->
+            <div class="playback-buttons">
+              <!-- Repeat mode -->
+              <button class="btn-player" data-repeat title="Repeat Track">
+                <span class="material-symbols-rounded">repeat</span>
+              </button>
+
+              <!-- Skip previous -->
+              <button class="btn-player" data-skip-prev title="Previous Song">
+                <span class="material-symbols-rounded">skip_previous</span>
+              </button>
+
+              <!-- Play Pause -->
+              <button class="btn-player play-pause" data-play-btn title="Play/Pause">
+                <span class="material-symbols-rounded default-icon">play_arrow</span>
+                <span class="material-symbols-rounded active-icon">pause</span>
+              </button>
+
+              <!-- Skip next -->
+              <button class="btn-player" data-skip-next title="Next Song">
+                <span class="material-symbols-rounded">skip_next</span>
+              </button>
+
+              <!-- Shuffle mode -->
+              <button class="btn-player" data-shuffle title="Shuffle Playlist">
+                <span class="material-symbols-rounded">shuffle</span>
+              </button>
+            </div>
+
+            <!-- Toggle playlist for desktop sidebar placeholder -->
+            <div style="width: 110px; display: flex; justify-content: flex-end;">
+              <button class="btn-player btn-playlist-toggle" data-playlist-toggler title="Toggle Sidebar">
+                <span class="material-symbols-rounded">playlist_play</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Screen overlay backdrop for mobile sidebar -->
+  <div class="overlay" data-playlist-toggler data-overlay></div>
+
+  <!-- Script logic file -->
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
